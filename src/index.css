@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-ubuntu: "Ubuntu", "sans-serif";
+}
+
+/* sm	40rem (640px)	@media (width >= 40rem) { ... }
+md	48rem (768px)	@media (width >= 48rem) { ... }
+lg	64rem (1024px)	@media (width >= 64rem) { ... }
+xl	80rem (1280px)	@media (width >= 80rem) { ... }
+2xl	96rem (1536px)	@media (width >= 96rem) { ... } */
