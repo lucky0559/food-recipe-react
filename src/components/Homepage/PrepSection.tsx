@@ -1,4 +1,4 @@
-import { PrepFood } from "@/assets/images";
+import { Cooking, Eating, Foods, PrepFood } from "@/assets/images";
 import { PrepCard } from "@/components/Homepage/PrepCard";
 import { CircleHelp } from "lucide-react";
 
@@ -10,19 +10,19 @@ const prepSteps = [
     className: "rounded-customA"
   },
   {
-    image: PrepFood,
+    image: Foods,
     stepCount: "-02",
     step: "Find Favorite Food",
     className: "rounded-customB"
   },
   {
-    image: PrepFood,
+    image: Cooking,
     stepCount: "-03",
     step: "Prepare and Cook",
     className: "rounded-customC"
   },
   {
-    image: PrepFood,
+    image: Eating,
     stepCount: "-04",
     step: "Enjoy Meal",
     className: "rounded-customD"

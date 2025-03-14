@@ -2,9 +2,9 @@ import { ManCooking } from "@/assets/images";
 
 export const ReviewSection = () => {
   return (
-    <div className="bg-red-500 p-5 flex justify-center items-center h-70">
+    <div className="bg-red-500 p-5 flex justify-center items-center h-fit lg:h-[26rem]">
       <div className="flex-1/2">
-        <p className="text-white text-sm text-center pr-15 pl-3">
+        <p className="text-white text-sm text-center pr-15 pl-3 lg:text-lg">
           I recently tried the [recipe name] from BiteMeDaily, and it was
           delightful! The flavors were perfectly balanced, and the dish was both
           visually appealing and delicious. The clear instructions made cooking
@@ -19,8 +19,7 @@ export const ReviewSection = () => {
         <img
           src={ManCooking}
           alt="Man cooking"
-          width={120}
-          className="rounded-xl"
+          className="rounded-xl w-32 md:w-36 lg:w-60"
         />
       </div>
     </div>
