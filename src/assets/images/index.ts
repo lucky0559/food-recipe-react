@@ -4,5 +4,14 @@ import ManCooking from "./man-cooking.jpg";
 import Foods from "./foods.jpg";
 import Cooking from "./cooking.jpg";
 import Eating from "./eating.jpg";
+import CherryCheesecakeDumpCake from "./cherry-cheesecake-dump-cake.jpg";
 
-export { DashboardTopImage, PrepFood, ManCooking, Foods, Cooking, Eating };
+export {
+  DashboardTopImage,
+  PrepFood,
+  ManCooking,
+  Foods,
+  Cooking,
+  Eating,
+  CherryCheesecakeDumpCake
+};
