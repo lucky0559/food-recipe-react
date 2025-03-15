@@ -19,9 +19,9 @@ export const NeedToTrySection = () => {
         </div>
       </div>
       <div>
-        {recipes.map(({ id, name, image, description }) => (
+        {recipes.map(({ _id, name, image, description }) => (
           <MenuCard
-            key={id}
+            key={_id}
             name={name}
             image={image}
             description={description}

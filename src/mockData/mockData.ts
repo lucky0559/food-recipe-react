@@ -2,7 +2,7 @@ import { CherryCheesecakeDumpCake } from "@/assets/images";
 
 export const recipes = [
   {
-    id: "1",
+    _id: "1",
     name: "Cherry Cheesecake Dump Cake",
     image: CherryCheesecakeDumpCake,
     description: "This is description",
