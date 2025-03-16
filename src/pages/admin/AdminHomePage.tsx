@@ -88,7 +88,7 @@ export const AdminHomePage = () => {
               addRecipe={addRecipe}
             />
             <div className="mr-3">
-              <span>Recipe: </span>
+              <span>Recipes: </span>
             </div>
             <span className="underline text-sm" onClick={openRecipe}>
               Edit Recipe
