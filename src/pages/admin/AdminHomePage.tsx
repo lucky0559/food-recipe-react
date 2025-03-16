@@ -1,18 +1,24 @@
 import { Button, FileButton } from "@/components/common";
 import { Drumstick } from "lucide-react";
 import { useDisclosure } from "@mantine/hooks";
-import { Fieldset, Modal, TextInput } from "@mantine/core";
+import { Fieldset, Modal, TagsInput, TextInput } from "@mantine/core";
 import { useCallback, useState } from "react";
-import { RecipeSetter } from "@/components/AdminHomePage";
+import { ProceduresSetter, RecipeSetter } from "@/components/AdminHomePage";
+import { category as categoryLists } from "@/lib";
 
 export const AdminHomePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [openedRecipe, { open: openRecipe, close: closeRecipe }] =
+  const [openedRecipe, { open: openRecipe, close: closeRecipes }] =
+    useDisclosure(false);
+  const [openedProcedures, { open: openProcedures, close: closeProcedures }] =
     useDisclosure(false);
   const [file, setFile] = useState<File | null>(null);
   const [recipes, setRecipes] = useState<string[]>([]);
   const [recipe, setRecipe] = useState("");
+  const [procedures, setProcedures] = useState<string[]>([]);
+  const [procedure, setProcedure] = useState("");
   const [error, setError] = useState("");
+  const [category, setCategory] = useState<string[]>([]);
 
   const onModalClose = useCallback(() => {
     close();
@@ -28,13 +34,31 @@ export const AdminHomePage = () => {
     setError("");
   }, [recipe, recipes]);
 
+  const addProcedure = useCallback(() => {
+    if (procedures.includes(procedure.toUpperCase())) {
+      return setError("This recipe exists!");
+    }
+    setProcedures([...procedures, procedure.toUpperCase()]);
+    setProcedure("");
+    setError("");
+  }, [procedure, procedures]);
+
   const onModalCloseRecipe = useCallback(() => {
-    closeRecipe();
+    closeRecipes();
     setRecipe("");
-  }, [closeRecipe]);
+  }, [closeRecipes]);
+
+  const onModalCloseProcedure = useCallback(() => {
+    closeProcedures();
+    setRecipe("");
+  }, [closeProcedures]);
 
   const onRemoveRecipe = useCallback((val: string) => {
     setRecipes(prevItems => prevItems.filter(i => i !== val));
+  }, []);
+
+  const onRemoveProcedure = useCallback((val: string) => {
+    setProcedures(prevItems => prevItems.filter(i => i !== val));
   }, []);
 
   return (
@@ -70,8 +94,31 @@ export const AdminHomePage = () => {
               Edit Recipe
             </span>
           </div>
-          <TextInput label="Procedures" placeholder="Procedures" mt="md" />
-          <TextInput label="Category" placeholder="Category" mt="md" />
+          <div className="mt-4 flex items-center">
+            <ProceduresSetter
+              error={error}
+              setProcedure={e => setProcedure(e)}
+              procedures={procedures}
+              procedure={procedure}
+              opened={openedProcedures}
+              onRemove={onRemoveProcedure}
+              onModalClose={onModalCloseProcedure}
+              addProcedure={addProcedure}
+            />
+            <div className="mr-3">
+              <span>Procedures: </span>
+            </div>
+            <span className="underline text-sm" onClick={openProcedures}>
+              Edit Procedures
+            </span>
+          </div>
+          <TagsInput
+            data={categoryLists}
+            label="Category(Press Enter to submit a tag)"
+            placeholder="Enter tag"
+            className="mt-4"
+            onChange={e => setCategory(e)}
+          />
         </Fieldset>
       </Modal>
       <Button text="Add Menu" Icon={Drumstick} onClick={open} />
