@@ -12,6 +12,7 @@ export const DrawerMenu = () => {
         <div className="flex flex-col">
           {menu.map(m => (
             <Link
+              key={m}
               to={`${m === "home" ? "/" : m}`}
               className="p-3 hover:bg-amber-50"
               onClick={close}

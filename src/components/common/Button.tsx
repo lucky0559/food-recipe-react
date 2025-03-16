@@ -6,9 +6,16 @@ type ButtonProps = {
   className?: string;
   Icon?: LucideIcon;
   onClick?: () => void;
+  isDisable?: boolean;
 };
 
-export const Button = ({ text, className, Icon, onClick }: ButtonProps) => {
+export const Button = ({
+  text,
+  className,
+  Icon,
+  onClick,
+  isDisable
+}: ButtonProps) => {
   return (
     <B
       variant="filled"
@@ -16,6 +23,7 @@ export const Button = ({ text, className, Icon, onClick }: ButtonProps) => {
       radius="xl"
       className={`${className}`}
       onClick={onClick}
+      disabled={isDisable}
     >
       {text}
       {Icon && <Icon size={18} className="ml-2" />}
