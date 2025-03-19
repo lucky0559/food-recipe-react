@@ -1,12 +1,24 @@
 import { FileButton as MFileButton, Group, Button, Text } from "@mantine/core";
-import { Dispatch, SetStateAction } from "react";
 
 type FileButtonProps = {
-  setFile: Dispatch<SetStateAction<File | null>>;
   file: File | null;
+  name?: string;
+  onChange: (f: File | null) => void;
+  // hasError: boolean;
 };
 
-export const FileButton = ({ setFile, file }: FileButtonProps) => {
+export const FileButton = ({
+  file,
+  name,
+  onChange
+}: // hasError
+FileButtonProps) => {
+  const onChangeTrigger = (f: File | null) => {
+    // if (!hasError) {
+    onChange(f);
+    // } else onChange(null);
+  };
+
   return (
     <>
       {file ? (
@@ -15,7 +27,11 @@ export const FileButton = ({ setFile, file }: FileButtonProps) => {
             {file.name}
           </Text>
           <Group justify="center" className="ml-4">
-            <MFileButton onChange={setFile} accept="image/png,image/jpeg">
+            <MFileButton
+              onChange={f => onChangeTrigger(f)}
+              accept="image/png,image/jpeg"
+              name={name}
+            >
               {props => (
                 <Button size="compact-xs" color="red" {...props}>
                   Replace
@@ -26,7 +42,11 @@ export const FileButton = ({ setFile, file }: FileButtonProps) => {
         </div>
       ) : (
         <Group justify="center" className="ml-4">
-          <MFileButton onChange={setFile} accept="image/png,image/jpeg">
+          <MFileButton
+            onChange={f => onChangeTrigger(f)}
+            accept="image/png,image/jpeg"
+            name={name}
+          >
             {props => (
               <Button color="red" {...props}>
                 Upload image

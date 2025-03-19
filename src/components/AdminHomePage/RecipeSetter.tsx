@@ -1,27 +1,29 @@
 import { Button } from "@/components/common";
 import { Modal, TextInput } from "@mantine/core";
+import { useState } from "react";
 
 type RecipeSetterType = {
   opened: boolean;
   onModalClose: () => void;
-  recipe: string;
   recipes: string[];
   onRemove: (val: string) => void;
-  setRecipe: (val: string) => void;
-  error?: string;
-  addRecipe: () => void;
+  addRecipe: (v: string) => void;
 };
 
 export const RecipeSetter = ({
   opened,
-  error,
-  setRecipe,
   recipes,
-  recipe,
   onRemove,
   onModalClose,
   addRecipe
 }: RecipeSetterType) => {
+  const [recipe, setRecipe] = useState("");
+
+  const onAdd = () => {
+    addRecipe(recipe);
+    setRecipe("");
+  };
+
   return (
     <Modal opened={opened} onClose={onModalClose} title="Edit Recipe">
       {recipes.map((r, index) => (
@@ -30,6 +32,8 @@ export const RecipeSetter = ({
             label={`Recipe ${index + 1}`}
             placeholder={`Recipe ${index + 1}`}
             defaultValue={r}
+            name={`recipes[${index + 1}]`}
+            disabled
           />
           <div className="flex my-2 justify-end" onClick={() => onRemove(r)}>
             <span className="text-xs underline">Remove</span>
@@ -42,14 +46,11 @@ export const RecipeSetter = ({
         onChange={e => setRecipe(e.target.value)}
         value={recipe}
         className="mb-5"
+        name={`recipes[${recipes.length}]`}
       />
-      {error && <span className="text-xs text-red-600">{error}</span>}
+      {/* {error && <span className="text-xs text-red-600">{error}</span>} */}
       <div className="flex justify-end">
-        <Button
-          text="Add recipe"
-          onClick={addRecipe}
-          isDisable={!recipe.length}
-        />
+        <Button text="Add recipe" onClick={onAdd} isDisable={!recipe.length} />
       </div>
     </Modal>
   );

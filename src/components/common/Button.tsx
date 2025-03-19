@@ -7,6 +7,7 @@ type ButtonProps = {
   Icon?: LucideIcon;
   onClick?: () => void;
   isDisable?: boolean;
+  type?: "button" | "submit" | "reset";
 };
 
 export const Button = ({
@@ -14,7 +15,8 @@ export const Button = ({
   className,
   Icon,
   onClick,
-  isDisable
+  isDisable,
+  type
 }: ButtonProps) => {
   return (
     <B
@@ -24,6 +26,7 @@ export const Button = ({
       className={`${className}`}
       onClick={onClick}
       disabled={isDisable}
+      type={type ?? "submit"}
     >
       {text}
       {Icon && <Icon size={18} className="ml-2" />}
