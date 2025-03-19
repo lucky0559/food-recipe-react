@@ -1,34 +1,22 @@
 import { FileButton as MFileButton, Group, Button, Text } from "@mantine/core";
 
 type FileButtonProps = {
-  file: File | null;
+  file: File | string;
   name?: string;
   onChange: (f: File | null) => void;
-  // hasError: boolean;
 };
 
-export const FileButton = ({
-  file,
-  name,
-  onChange
-}: // hasError
-FileButtonProps) => {
-  const onChangeTrigger = (f: File | null) => {
-    // if (!hasError) {
-    onChange(f);
-    // } else onChange(null);
-  };
-
+export const FileButton = ({ file, name, onChange }: FileButtonProps) => {
   return (
     <>
       {file ? (
         <div className="flex items-center">
           <Text size="sm" ml={10}>
-            {file.name}
+            {file instanceof File ? file.name : ""}
           </Text>
           <Group justify="center" className="ml-4">
             <MFileButton
-              onChange={f => onChangeTrigger(f)}
+              onChange={onChange}
               accept="image/png,image/jpeg"
               name={name}
             >
@@ -43,7 +31,7 @@ FileButtonProps) => {
       ) : (
         <Group justify="center" className="ml-4">
           <MFileButton
-            onChange={f => onChangeTrigger(f)}
+            onChange={onChange}
             accept="image/png,image/jpeg"
             name={name}
           >

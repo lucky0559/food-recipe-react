@@ -19,7 +19,7 @@ type FormAddMenuProps = {
       ? void
       : (e: string | React.ChangeEvent<unknown>) => void;
   };
-  image: File | null;
+  image: File | string;
   setFieldError: (field: string, message: string | undefined) => void;
   setFieldValue: (
     field: string,
@@ -27,7 +27,7 @@ type FormAddMenuProps = {
     shouldValidate?: boolean
   ) => Promise<void | FormikErrors<{
     name: string;
-    image: null;
+    image: File | string;
     description: string;
     recipes: string[];
     procedures: string[];

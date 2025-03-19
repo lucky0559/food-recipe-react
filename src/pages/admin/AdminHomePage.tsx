@@ -5,8 +5,8 @@ import { gql, useMutation } from "@apollo/client";
 import { Formik } from "formik";
 import { toFormikValidate } from "zod-formik-adapter";
 import { Menu } from "@/types";
-import { FormAddMenu } from "@/components/AdminHomePage/FormAddMenu";
 import { validationMenuSchema } from "@/zodSchema";
+import { FormAddMenu } from "@/components/AdminHomePage";
 
 export const AdminHomePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -20,7 +20,7 @@ export const AdminHomePage = () => {
       $procedures: [String!]
       $category: [String!]
     ) {
-      createUser(
+      createMenu(
         name: $name
         image: $image
         description: $description
@@ -38,10 +38,14 @@ export const AdminHomePage = () => {
     }
   `;
 
-  // const [createMenu] = useMutation(CREATE_MENU, );
+  const [createMenu] = useMutation(CREATE_MENU);
 
-  const onCreateMenu = (menu: Omit<Menu, "image"> & { image: File }) => {
+  const onCreateMenu = (
+    menu: Omit<Menu, "image"> & { image: File | string }
+  ) => {
+    // menu.image = "new image";
     console.log("CREATING MENU: ", menu);
+    // createMenu({ variables: menu })
   };
 
   return (
@@ -49,7 +53,7 @@ export const AdminHomePage = () => {
       <Formik
         initialValues={{
           name: "",
-          image: null,
+          image: "",
           description: "",
           recipes: [] as string[],
           procedures: [] as string[],
@@ -58,10 +62,7 @@ export const AdminHomePage = () => {
         validate={toFormikValidate(validationMenuSchema)}
         onSubmit={values => {
           // const isValid = isValidObject(values)
-          // if (values.image !== null) {
-          //   onCreateMenu(values);
-          // }
-          console.log("FORM SUBMITTED: ", values);
+          onCreateMenu(values);
         }}
       >
         {({
