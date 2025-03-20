@@ -20,39 +20,42 @@ const formatBytes = (bytes: number, decimals = 2) => {
 
 export const validationMenuSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
-  image: z
-    .instanceof(File, {
-      message: "Please select an image file."
-    })
-    .refine(file => file.size <= MAX_FILE_SIZE, {
-      message: `The image is too large. Please choose an image smaller than ${formatBytes(
-        MAX_FILE_SIZE
-      )}.`
-    })
-    .refine(file => ACCEPTED_IMAGE_TYPES.includes(file.type), {
-      message: "Please upload a valid image file (JPEG, PNG, or WebP)."
-    })
-    .refine(
-      file =>
-        new Promise(resolve => {
-          const reader = new FileReader();
-          reader.onload = e => {
-            const img = new Image();
-            img.onload = () => {
-              const meetsDimensions =
-                img.width === DIMENSIONS.width &&
-                img.height === DIMENSIONS.height;
-              resolve(meetsDimensions);
+  image: z.union([
+    z.string().min(2, "Please select file"),
+    z
+      .instanceof(File, {
+        message: "Please select an image file."
+      })
+      .refine(file => file.size <= MAX_FILE_SIZE, {
+        message: `The image is too large. Please choose an image smaller than ${formatBytes(
+          MAX_FILE_SIZE
+        )}.`
+      })
+      .refine(file => ACCEPTED_IMAGE_TYPES.includes(file.type), {
+        message: "Please upload a valid image file (JPEG, PNG, or WebP)."
+      })
+      .refine(
+        file =>
+          new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = e => {
+              const img = new Image();
+              img.onload = () => {
+                const meetsDimensions =
+                  img.width === DIMENSIONS.width &&
+                  img.height === DIMENSIONS.height;
+                resolve(meetsDimensions);
+              };
+              img.src = e.target?.result as string;
             };
-            img.src = e.target?.result as string;
-          };
-          reader.readAsDataURL(file);
-        }),
-      {
-        message: `The image dimensions are invalid. Please upload an image ${DIMENSIONS.width}x${DIMENSIONS.height} pixels.`
-      }
-    )
-    .nullable(),
+            reader.readAsDataURL(file);
+          }),
+        {
+          message: `The image dimensions are invalid. Please upload an image ${DIMENSIONS.width}x${DIMENSIONS.height} pixels.`
+        }
+      )
+      .nullable()
+  ]),
   description: z.string().nonempty("Please enter description"),
   recipes: z.array(z.string()).min(1, "Must have at least one recipe"),
   procedures: z.array(z.string()).min(1, "Must have at least one procedure"),

@@ -12,22 +12,8 @@ export const AdminHomePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const CREATE_MENU = gql`
-    mutation CreateMenu(
-      $name: String!
-      $image: String!
-      $description: String!
-      $recipes: [String!]
-      $procedures: [String!]
-      $category: [String!]
-    ) {
-      createMenu(
-        name: $name
-        image: $image
-        description: $description
-        recipes: $recipes
-        procedures: $procedures
-        category: $category
-      ) {
+    mutation CreateMenu($input: CreateMenuInput!) {
+      createMenu(input: $input) {
         name
         image
         description
@@ -40,12 +26,17 @@ export const AdminHomePage = () => {
 
   const [createMenu] = useMutation(CREATE_MENU);
 
-  const onCreateMenu = (
+  const onCreateMenu = async (
     menu: Omit<Menu, "image"> & { image: File | string }
   ) => {
-    // menu.image = "new image";
+    // menu.image = "test image";
     console.log("CREATING MENU: ", menu);
-    // createMenu({ variables: menu })
+    const res = await createMenu({
+      variables: {
+        input: menu
+      }
+    });
+    console.log("RESULT: ", res);
   };
 
   return (
