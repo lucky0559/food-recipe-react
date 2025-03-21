@@ -15,7 +15,9 @@ export const AdminHomePage = () => {
     mutation CreateMenu($input: CreateMenuInput!) {
       createMenu(input: $input) {
         name
-        image
+        image {
+          url
+        }
         description
         recipes
         procedures
@@ -34,6 +36,11 @@ export const AdminHomePage = () => {
     const res = await createMenu({
       variables: {
         input: menu
+      },
+      context: {
+        headers: {
+          "Apollo-Require-Preflight": "true"
+        }
       }
     });
     console.log("RESULT: ", res);
