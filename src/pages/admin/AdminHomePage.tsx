@@ -1,49 +1,33 @@
 import { Button } from "@/components/common";
 import { Drumstick } from "lucide-react";
 import { useDisclosure } from "@mantine/hooks";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { Formik } from "formik";
 import { toFormikValidate } from "zod-formik-adapter";
 import { Menu } from "@/types";
 import { validationMenuSchema } from "@/zodSchema";
 import { FormAddMenu } from "@/components/AdminHomePage";
+import { CREATE_MENU } from "@/graphql/mutations/menu.mutation";
 
 export const AdminHomePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
-  const CREATE_MENU = gql`
-    mutation CreateMenu($input: CreateMenuInput!) {
-      createMenu(input: $input) {
-        name
-        image {
-          url
-        }
-        description
-        recipes
-        procedures
-        category
-      }
-    }
-  `;
-
-  const [createMenu] = useMutation(CREATE_MENU);
+  const [createMenu, { loading }] = useMutation(CREATE_MENU);
 
   const onCreateMenu = async (
     menu: Omit<Menu, "image"> & { image: File | string }
   ) => {
-    // menu.image = "test image";
-    console.log("CREATING MENU: ", menu);
-    const res = await createMenu({
-      variables: {
-        input: menu
-      },
-      context: {
-        headers: {
-          "Apollo-Require-Preflight": "true"
+    try {
+      console.log("CREATING MENU: ", menu);
+      const res = await createMenu({
+        variables: {
+          input: menu
         }
-      }
-    });
-    console.log("RESULT: ", res);
+      });
+      console.log("RESULT: ", res);
+    } catch (e) {
+      return e;
+    }
   };
 
   return (
@@ -58,9 +42,10 @@ export const AdminHomePage = () => {
           category: [] as string[]
         }}
         validate={toFormikValidate(validationMenuSchema)}
-        onSubmit={values => {
-          // const isValid = isValidObject(values)
-          onCreateMenu(values);
+        onSubmit={async (values, { resetForm }) => {
+          await onCreateMenu(values);
+          resetForm();
+          close();
         }}
       >
         {({
@@ -80,6 +65,7 @@ export const AdminHomePage = () => {
             submitForm={submitForm}
             opened={opened}
             close={close}
+            isSubmitting={loading}
           />
         )}
       </Formik>

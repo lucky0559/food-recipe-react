@@ -11,7 +11,12 @@ const client = new ApolloClient({
   uri: "http://localhost:4000/graphql", // server
   cache: new InMemoryCache(), // apollo client uses to cache query results after fetching them
   credentials: "include", // this tells apollo client to send cookies along with every request to server
-  link: createUploadLink({ uri: "http://localhost:4000/graphql" })
+  link: createUploadLink({ uri: "http://localhost:4000/graphql" }),
+  defaultContext: {
+    headers: {
+      "Apollo-Require-Preflight": "true"
+    }
+  }
 });
 
 createRoot(document.getElementById("root")!).render(
