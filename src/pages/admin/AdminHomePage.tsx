@@ -1,5 +1,5 @@
 import { Button } from "@/components/common";
-import { Drumstick } from "lucide-react";
+import { CheckIcon, Drumstick } from "lucide-react";
 import { useDisclosure } from "@mantine/hooks";
 import { useMutation } from "@apollo/client";
 import { Formik } from "formik";
@@ -8,6 +8,7 @@ import { Menu } from "@/types";
 import { validationMenuSchema } from "@/zodSchema";
 import { FormAddMenu } from "@/components/AdminHomePage";
 import { CREATE_MENU } from "@/graphql/mutations/menu.mutation";
+import { Notification } from "@mantine/core";
 
 export const AdminHomePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -18,7 +19,6 @@ export const AdminHomePage = () => {
     menu: Omit<Menu, "image"> & { image: File | string }
   ) => {
     try {
-      console.log("CREATING MENU: ", menu);
       const res = await createMenu({
         variables: {
           input: menu
@@ -46,6 +46,7 @@ export const AdminHomePage = () => {
           await onCreateMenu(values);
           resetForm();
           close();
+          //TODO: ERROR HANDLING
         }}
       >
         {({
@@ -70,6 +71,16 @@ export const AdminHomePage = () => {
         )}
       </Formik>
       <Button text="Add Menu" Icon={Drumstick} onClick={open} />
+      {/* {false && (
+        <Notification
+          icon={<CheckIcon />}
+          color="teal"
+          title="Success!"
+          mt="md"
+        >
+          Adding complete!
+        </Notification>
+      )} */}
     </div>
   );
 };
