@@ -1,7 +1,7 @@
 import { Button } from "@/components/common";
 import { CheckIcon, Drumstick } from "lucide-react";
 import { useDisclosure } from "@mantine/hooks";
-import { useMutation } from "@apollo/client";
+import { ApolloError, useMutation } from "@apollo/client";
 import { Formik } from "formik";
 import { toFormikValidate } from "zod-formik-adapter";
 import { Menu } from "@/types";
@@ -9,11 +9,17 @@ import { validationMenuSchema } from "@/zodSchema";
 import { FormAddMenu } from "@/components/AdminHomePage";
 import { CREATE_MENU } from "@/graphql/mutations/menu.mutation";
 import { Notification } from "@mantine/core";
+import { useState } from "react";
+import { notifications } from "@mantine/notifications";
 
 export const AdminHomePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const [createMenu, { loading }] = useMutation(CREATE_MENU);
+
+  const [error, setError] = useState("");
+
+  //TODO: NOTIF FOR SUCCESS NEW MENU
 
   const onCreateMenu = async (
     menu: Omit<Menu, "image"> & { image: File | string }
@@ -43,10 +49,31 @@ export const AdminHomePage = () => {
         }}
         validate={toFormikValidate(validationMenuSchema)}
         onSubmit={async (values, { resetForm }) => {
-          await onCreateMenu(values);
+          setError("");
+          const res = await onCreateMenu(values);
+          console.log(res);
+          if (res instanceof ApolloError) {
+            return setError(res.message);
+          }
           resetForm();
           close();
-          //TODO: ERROR HANDLING
+          notifications.show({
+            title: "Success!",
+            message: "Adding Completed!",
+            style: {
+              position: "absolute",
+              bottom: 30,
+              left: 25,
+              right: 25,
+              width: "90%",
+              backgroundColor: "green"
+            },
+            styles: theme => ({
+              title: { color: theme.white },
+              description: { color: theme.white }
+            }),
+            color: "white"
+          });
         }}
       >
         {({
@@ -67,6 +94,7 @@ export const AdminHomePage = () => {
             opened={opened}
             close={close}
             isSubmitting={loading}
+            error={error}
           />
         )}
       </Formik>

@@ -6,6 +6,7 @@ import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+import { Notifications } from "@mantine/notifications";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql", // server
@@ -22,6 +23,7 @@ const client = new ApolloClient({
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <MantineProvider>
+      <Notifications />
       <ApolloProvider client={client}>
         <App />
       </ApolloProvider>

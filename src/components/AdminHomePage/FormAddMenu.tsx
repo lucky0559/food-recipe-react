@@ -46,6 +46,7 @@ type FormAddMenuProps = {
   opened: boolean;
   close: () => void;
   isSubmitting: boolean;
+  error: string | undefined;
 };
 
 export const FormAddMenu = ({
@@ -58,7 +59,8 @@ export const FormAddMenu = ({
   submitForm,
   opened,
   close,
-  isSubmitting
+  isSubmitting,
+  error
 }: FormAddMenuProps) => {
   const [openedRecipe, { open: openRecipe, close: closeRecipes }] =
     useDisclosure(false);
@@ -215,6 +217,9 @@ export const FormAddMenu = ({
               className="text-red-500 text-xs"
             />
           </Fieldset>
+          {error && (
+            <span className="text-red-500 text-sm">{`${error}, please try again`}</span>
+          )}
           <div className="mt-5 flex justify-end">
             <Button text="Add" Icon={Plus} type="submit" onClick={submitForm} />
           </div>
