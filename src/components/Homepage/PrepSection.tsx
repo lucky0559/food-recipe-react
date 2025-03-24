@@ -35,19 +35,19 @@ export const PrepSection = () => {
       <div className="py-10">
         <div className="flex flex-col justify-center items-center">
           <CircleHelp />
-          <span className="text-2xl mt-2">How Does it Works</span>
+          <span className="text-xl lg:text-2xl xl:text-3xl mt-2">
+            How Does it Works
+          </span>
         </div>
         <div className="p-4 flex justify-center flex-wrap items-center">
           {prepSteps.map(({ image, stepCount, step, className }) => (
-            <>
-              <PrepCard
-                key={stepCount}
-                image={image}
-                stepCount={stepCount}
-                step={step}
-                className={className}
-              />
-            </>
+            <PrepCard
+              key={stepCount}
+              image={image}
+              stepCount={stepCount}
+              step={step}
+              className={className}
+            />
           ))}
         </div>
       </div>

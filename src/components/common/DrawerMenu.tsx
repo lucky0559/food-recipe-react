@@ -22,7 +22,7 @@ export const DrawerMenu = () => {
           ))}
         </div>
       </Drawer>
-      <Burger opened={opened} onClick={open} />
+      <Burger size={20} opened={opened} onClick={open} hiddenFrom="lg" />
     </div>
   );
 };

@@ -7,7 +7,7 @@ export const WelcomeSection = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="p-5 flex flex-col justify-center">
-        <p className="text-4xl font-bold text-center">
+        <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-center">
           Welcome to BiteMe<span className="text-red-500">Daily</span>, where
           exceptional flavor meets unparalleled excellence
         </p>
@@ -19,7 +19,7 @@ export const WelcomeSection = () => {
         <img
           src={DashboardTopImage}
           alt="Lily banse"
-          className="h-80 lg:h-96 w-full rounded-4xl xl:h-[30rem] 2xl:h-[36rem]"
+          className="h-50 md:h-72 lg:h-96 xl:h-[35rem] w-full rounded-4xl"
         />
       </div>
     </div>

@@ -94,16 +94,6 @@ export const AdminHomePage = () => {
         )}
       </Formik>
       <Button text="Add Menu" Icon={Drumstick} onClick={open} />
-      {/* {false && (
-        <Notification
-          icon={<CheckIcon />}
-          color="teal"
-          title="Success!"
-          mt="md"
-        >
-          Adding complete!
-        </Notification>
-      )} */}
     </div>
   );
 };

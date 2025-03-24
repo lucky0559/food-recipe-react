@@ -10,6 +10,9 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset";
 };
 
+const textSpanClassname = "text-xs md:text-lg lg:text-xl";
+const iconClassname = "ml-2";
+
 export const Button = ({
   text,
   className,
@@ -19,17 +22,49 @@ export const Button = ({
   type
 }: ButtonProps) => {
   return (
-    <B
-      variant="filled"
-      color="red"
-      radius="xl"
-      className={`${className}`}
-      onClick={onClick}
-      disabled={isDisable}
-      type={type ?? "submit"}
-    >
-      {text}
-      {Icon && <Icon size={18} className="ml-2" />}
-    </B>
+    <>
+      <B
+        variant="filled"
+        color="red"
+        radius="xl"
+        className={`${className}`}
+        onClick={onClick}
+        disabled={isDisable}
+        type={type ?? "submit"}
+        hiddenFrom="lg"
+      >
+        <span className={textSpanClassname}>{text}</span>
+        {Icon && <Icon className={iconClassname} />}
+      </B>
+      <B
+        variant="filled"
+        color="red"
+        radius="xl"
+        className={`${className}`}
+        onClick={onClick}
+        disabled={isDisable}
+        type={type ?? "submit"}
+        size="md"
+        visibleFrom="lg"
+        hiddenFrom="xl"
+      >
+        <span className={textSpanClassname}>{text}</span>
+        {Icon && <Icon className={iconClassname} />}
+      </B>
+      <B
+        variant="filled"
+        color="red"
+        radius="xl"
+        className={`${className}`}
+        onClick={onClick}
+        disabled={isDisable}
+        type={type ?? "submit"}
+        size="lg"
+        visibleFrom="xl"
+      >
+        <span className={textSpanClassname}>{text}</span>
+        {Icon && <Icon className={iconClassname} />}
+      </B>
+    </>
   );
 };
