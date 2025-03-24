@@ -8,7 +8,6 @@ import { Menu } from "@/types";
 import { validationMenuSchema } from "@/zodSchema";
 import { FormAddMenu } from "@/components/AdminHomePage";
 import { CREATE_MENU } from "@/graphql/mutations/menu.mutation";
-import { Notification } from "@mantine/core";
 import { useState } from "react";
 import { notifications } from "@mantine/notifications";
 
@@ -65,14 +64,10 @@ export const AdminHomePage = () => {
               bottom: 30,
               left: 25,
               right: 25,
-              width: "90%",
-              backgroundColor: "green"
+              width: "90%"
             },
-            styles: theme => ({
-              title: { color: theme.white },
-              description: { color: theme.white }
-            }),
-            color: "white"
+            color: "green",
+            icon: <CheckIcon />
           });
         }}
       >
