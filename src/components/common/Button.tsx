@@ -10,8 +10,8 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset";
 };
 
-const textSpanClassname = "text-xs md:text-lg lg:text-xl";
-const iconClassname = "ml-2";
+const textSpanClassname = "text-xs md:text-sm lg:text-lg";
+const iconClassname = "ml-2 w-5 h-5";
 
 export const Button = ({
   text,

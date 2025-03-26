@@ -4,7 +4,7 @@ export const ReviewSection = () => {
   return (
     <div className="bg-red-500 p-5 flex justify-center items-center h-fit lg:h-[26rem] flex-col lg:flex-row">
       <div className="flex-1/2 lg:px-8">
-        <p className="text-white text-sm md:text-lg lg:text-lg xl:text-xl text-center ">
+        <p className="text-white text-sm md:text-lg lg:text-xl xl:text-xl text-center ">
           "I recently tried the [recipe name] from BiteMeDaily, and it was
           delightful! The flavors were perfectly balanced, and the dish was both
           visually appealing and delicious. The clear instructions made cooking
@@ -13,8 +13,8 @@ export const ReviewSection = () => {
           fantastic experience that I highly recommend. BiteMeDaily truly brings
           flavor and excellence to the table!"
         </p>
-        <div className="mt-3 lg:flex lg:justify-end lg:pr-11">
-          <span className="text-black text-sm md:text-lg lg:text-lg xl:text-xl">
+        <div className="mt-3 flex justify-end pr-11">
+          <span className="text-black text-sm md:text-lg lg:text-xl xl:text-xl">
             -York York
           </span>
         </div>
@@ -23,7 +23,7 @@ export const ReviewSection = () => {
         <img
           src={ManCooking}
           alt="Man cooking"
-          className="rounded-xl w-48 md:w-52 xl:w-64"
+          className="rounded-xl w-48 md:w-52 lg:w-64 xl:w-64"
         />
       </div>
     </div>

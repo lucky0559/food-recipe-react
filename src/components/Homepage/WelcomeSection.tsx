@@ -19,7 +19,7 @@ export const WelcomeSection = () => {
         <img
           src={DashboardTopImage}
           alt="Lily banse"
-          className="h-50 md:h-72 lg:h-96 xl:h-[35rem] w-full rounded-4xl"
+          className="h-56 sm:h-64 md:h-72 lg:h-96 xl:h-[35rem] w-full rounded-4xl"
         />
       </div>
     </div>

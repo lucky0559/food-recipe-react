@@ -34,8 +34,8 @@ export const PrepSection = () => {
     <>
       <div className="py-10">
         <div className="flex flex-col justify-center items-center">
-          <CircleHelp />
-          <span className="text-xl lg:text-2xl xl:text-3xl mt-2">
+          <CircleHelp className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8" />
+          <span className="text-xl md:text-2xl lg:text-3xl xl:text-3xl mt-2">
             How Does it Works
           </span>
         </div>
