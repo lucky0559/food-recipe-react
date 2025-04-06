@@ -26,7 +26,7 @@ type FormAddMenuProps = {
       ? void
       : (e: string | React.ChangeEvent<unknown>) => void;
   };
-  image: File | string;
+  imageUrl: File | string;
   setFieldError: (field: string, message: string | undefined) => void;
   setFieldValue: (
     field: string,
@@ -34,7 +34,7 @@ type FormAddMenuProps = {
     shouldValidate?: boolean
   ) => Promise<void | FormikErrors<{
     name: string;
-    image: File | string;
+    imageUrl: File | string;
     description: string;
     recipes: string[];
     procedures: string[];
@@ -51,7 +51,7 @@ type FormAddMenuProps = {
 
 export const FormAddMenu = ({
   handleChange,
-  image,
+  imageUrl,
   setFieldError,
   setFieldValue,
   recipes,
@@ -98,20 +98,20 @@ export const FormAddMenu = ({
               <div className="flex items-center mt-4">
                 <span>Image: </span>
                 <FileButton
-                  file={image}
-                  name="image"
+                  file={imageUrl}
+                  name="imageUrl"
                   onChange={async f => {
                     if (f) {
                       try {
-                        await validationMenuSchema.shape.image.parseAsync(f);
-                        setFieldError("image", undefined);
+                        await validationMenuSchema.shape.imageUrl.parseAsync(f);
+                        setFieldError("imageUrl", undefined);
                         setErrorImage("");
-                        setFieldValue("image", f);
+                        setFieldValue("imageUrl", f);
                       } catch (e) {
                         if (e instanceof ZodError) {
                           setErrorImage(e.errors[0].message);
-                          setFieldValue("image", null);
-                          setFieldError("image", e.errors[0].message);
+                          setFieldValue("imageUrl", null);
+                          setFieldError("imageUrl", e.errors[0].message);
                         }
                       }
                     }

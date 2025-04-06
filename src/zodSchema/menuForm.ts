@@ -20,7 +20,7 @@ const formatBytes = (bytes: number, decimals = 2) => {
 
 export const validationMenuSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
-  image: z.union([
+  imageUrl: z.union([
     z.string().min(2, "Please select file"),
     z
       .instanceof(File, {

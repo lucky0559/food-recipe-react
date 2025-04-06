@@ -21,7 +21,7 @@ export const AdminHomePage = () => {
   //TODO: NOTIF FOR SUCCESS NEW MENU
 
   const onCreateMenu = async (
-    menu: Omit<Menu, "image"> & { image: File | string }
+    menu: Omit<Menu, "imageUrl"> & { imageUrl: File | string }
   ) => {
     try {
       const res = await createMenu({
@@ -35,12 +35,14 @@ export const AdminHomePage = () => {
     }
   };
 
+  // TODO: INTEGRATE RICH TEXT EDITOR FOR RECIPES AND PROCEDURES
+
   return (
     <div className="p-10">
       <Formik
         initialValues={{
           name: "",
-          image: "",
+          imageUrl: "",
           description: "",
           recipes: [] as string[],
           procedures: [] as string[],
@@ -80,7 +82,7 @@ export const AdminHomePage = () => {
         }) => (
           <FormAddMenu
             handleChange={handleChange}
-            image={values.image}
+            imageUrl={values.imageUrl}
             setFieldError={setFieldError}
             setFieldValue={setFieldValue}
             recipes={values.recipes}
