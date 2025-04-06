@@ -59,5 +59,5 @@ export const validationMenuSchema = z.object({
   description: z.string().nonempty("Please enter description"),
   recipes: z.array(z.string()).min(1, "Must have at least one recipe"),
   procedures: z.array(z.string()).min(1, "Must have at least one procedure"),
-  category: z.array(z.string()).min(1, "Must have at least one category")
+  categories: z.array(z.string()).min(1, "Must have at least one category")
 });

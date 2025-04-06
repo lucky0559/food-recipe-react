@@ -44,7 +44,7 @@ export const AdminHomePage = () => {
           description: "",
           recipes: [] as string[],
           procedures: [] as string[],
-          category: [] as string[]
+          categories: [] as string[]
         }}
         validate={toFormikValidate(validationMenuSchema)}
         onSubmit={async (values, { resetForm }) => {

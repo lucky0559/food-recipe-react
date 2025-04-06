@@ -8,7 +8,7 @@ type ChipProps = {
 
 export const Chip = ({ text, checked, onChange }: ChipProps) => {
   return (
-    <C checked={checked} onChange={() => onChange(text)}>
+    <C checked={checked} onChange={() => onChange(text)} className="mx-3">
       {text}
     </C>
   );

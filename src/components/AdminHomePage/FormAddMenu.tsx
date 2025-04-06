@@ -208,11 +208,11 @@ export const FormAddMenu = ({
               label="Category(Press Enter to submit a tag)"
               placeholder="Enter tag"
               className="mt-4"
-              onChange={e => setFieldValue("category", e)}
-              name="category"
+              onChange={e => setFieldValue("categories", e)}
+              name="categories"
             />
             <ErrorMessage
-              name="category"
+              name="categories"
               component={"span"}
               className="text-red-500 text-xs"
             />

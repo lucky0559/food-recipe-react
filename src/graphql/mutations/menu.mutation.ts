@@ -8,7 +8,7 @@ export const CREATE_MENU = gql`
       description
       recipes
       procedures
-      category
+      categories
     }
   }
 `;

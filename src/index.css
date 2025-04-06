@@ -10,11 +10,15 @@
   --radius-customD: 68% 32% 49% 51% / 53% 100% 0% 47%;
 }
 
-/* @layer utilities {
-  .custom-border {
-    border-radius: 0% 100% 51% 49% / 49% 30% 70% 51%;
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-} */
+
+  .hide-scrollbar {
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+  }
+}
 
 /* xs	40rem (475px)	@media (width <= 30rem) { ... } xs mobile
 sm	40rem (640px)	@media (width >= 40rem) { ... } mobile

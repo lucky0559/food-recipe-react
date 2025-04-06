@@ -1,13 +1,21 @@
 import { MenuCard } from "@/components/common";
-import { recipes } from "@/mockData/mockData";
+import { Menu } from "@/types";
 import { MoveRight } from "lucide-react";
 
-export const NeedToTrySection = () => {
+type FoodListsSectionProps = {
+  menus: Menu[];
+  headerText: string;
+};
+
+export const FoodListsSection = ({
+  menus,
+  headerText
+}: FoodListsSectionProps) => {
   return (
     <div className="px-5 pt-5">
       <div className="flex items-center justify-between">
         <div>
-          <span className="text-2xl font-bold italic">Need to try</span>
+          <span className="text-2xl font-bold italic">{headerText}</span>
         </div>
         <div className="flex items-center justify-between">
           <div>
@@ -19,11 +27,11 @@ export const NeedToTrySection = () => {
         </div>
       </div>
       <div>
-        {recipes.map(({ _id, name, image, description }) => (
+        {menus.map(({ _id, name, imageUrl, description }) => (
           <MenuCard
             key={_id}
             name={name}
-            image={image}
+            imageUrl={imageUrl}
             description={description}
           />
         ))}

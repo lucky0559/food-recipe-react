@@ -3,13 +3,13 @@ import { gql } from "@apollo/client";
 export const GET_ALL_MENU = gql`
   query GetAllMenu {
     allMenu {
-      id
+      _id
       name
-      image
+      imageUrl
       description
       recipes
       procedures
-      category
+      categories
     }
   }
 `;

@@ -1,4 +1,4 @@
 import { ChipList } from "./ChipList";
-import { NeedToTrySection } from "./NeedToTrySection";
+import { FoodListsSection } from "./FoodListsSection";
 
-export { ChipList, NeedToTrySection };
+export { ChipList, FoodListsSection };

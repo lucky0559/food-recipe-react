@@ -1,10 +1,11 @@
 type Menu = {
+  _id?: string;
   name: string;
-  image: string;
+  imageUrl: string;
   description: string;
   recipes: string[];
   procedures: string[];
-  category: string[];
+  categories: string[];
 };
 
 type Menus = Menu[];
